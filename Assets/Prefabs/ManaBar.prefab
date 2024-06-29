@@ -334,6 +334,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8915248263081334818}
   - component: {fileID: 8915248263081334819}
+  - component: {fileID: 787200690279050140}
   m_Layer: 5
   m_Name: ManaBar
   m_TagString: Untagged
@@ -416,6 +417,20 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &787200690279050140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8915248263081334821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d04cd27c058bd8549b12fe33c1108fdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentManaText: {fileID: 8915248262266439852}
+  manaSlider: {fileID: 8915248263081334819}
 --- !u!1 &8915248263222326840
 GameObject:
   m_ObjectHideFlags: 0
