@@ -15,6 +15,6 @@ public class Item
     public int level;
     public int price;
 
-    public Image image;
+    public Sprite image;
 
 }

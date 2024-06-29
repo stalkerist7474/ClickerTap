@@ -7,10 +7,10 @@ using UnityEngine.UI;
 public class GenerateItemSystem : MonoBehaviour, IEventSubscriber<SignalToGenerateNewItemEvent>
 {
 
-    private Dictionary<TypeItem, Image> imageStore;
+    private Dictionary<TypeItem, Sprite> imageStore = new Dictionary<TypeItem, Sprite>();
 
     [SerializeField] private List<TypeItem> typeItem;
-    [SerializeField] private List<Image> iconItem;
+    [SerializeField] private List<Sprite> iconItem;
 
     private void Awake()
     {

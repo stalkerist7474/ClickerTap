@@ -15,17 +15,20 @@ public class LootPopUpPanel : MonoBehaviour
 
     [SerializeField] private Button buttonUse;
     [SerializeField] private Button buttonSell;
+    [SerializeField] private TextMeshProUGUI buttonSellText;
 
     [SerializeField] private GameObject panelObject;
 
 
     public void InitDataItem(Item item, string healthText, string agilityText, string damageText, string armorText)
     {
-        iconItem = item.image;
+        iconItem.sprite = item.image;
         healthStatText.text = healthText;
         agilityStatText.text = agilityText;
         damageStatText.text = damageText;
         armorStatText.text = armorText;
+
+        buttonSellText.text = "Sell by +" + item.price.ToString();
 
         showPopUp();
     }
@@ -45,9 +48,4 @@ public class LootPopUpPanel : MonoBehaviour
     {
         panelObject.SetActive(false);
     }
-}
-public enum TypeButtonPopUpLoot
-{
-    Use,
-    Sell
 }

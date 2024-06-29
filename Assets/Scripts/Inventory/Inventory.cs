@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
+using static UnityEditor.Progress;
 using static UnityEditor.Timeline.Actions.MenuPriority;
 
 public class Inventory : MonoBehaviour, IEventSubscriber<GenerateNewItemEvent>, IEventSubscriber<PressButtonPopUpLootEvent>
@@ -9,7 +11,7 @@ public class Inventory : MonoBehaviour, IEventSubscriber<GenerateNewItemEvent>, 
     [SerializeField] private LootPopUpPanel lootPopUpPanel;
 
 
-    private Item[] itemsInventory;
+    [SerializeField] private List<InventorySlotModel> slotsItemsInventory;
 
 
 
@@ -20,6 +22,9 @@ public class Inventory : MonoBehaviour, IEventSubscriber<GenerateNewItemEvent>, 
     private string damageText;
     private string armorText;
 
+    [SerializeField] private Sprite defaultIcon;
+
+
     private void Awake()
     {
         Subscribe();
@@ -27,7 +32,7 @@ public class Inventory : MonoBehaviour, IEventSubscriber<GenerateNewItemEvent>, 
 
     private void Start()
     {
-        
+        //GenerateStartInventory();
     }
     private void Subscribe()
     {
@@ -67,50 +72,59 @@ public class Inventory : MonoBehaviour, IEventSubscriber<GenerateNewItemEvent>, 
     private void CompareStatsToText(TypeItem type)
     {
 
-        for (int i = 0; i < itemsInventory.Length; i++)
+        for (int i = 0; i < slotsItemsInventory.Count; i++)
         {
-            if (itemsInventory[i].typeItem == type)
+            if (slotsItemsInventory[i].typeSlot == type)
             {
+                //if empty slot
+                if(slotsItemsInventory[i].currentItem == null)
+                {
+                    healthText = $" 0 + {currentItem.health}";
+                    agilityText = $" 0 + {currentItem.agility}";
+                    damageText = $" 0 + {currentItem.damage}";
+                    armorText = $" 0 + {currentItem.armor}";
+                    return;
+                }
 
                 //Health
-                if (itemsInventory[i].health != currentItem.health)
+                if (slotsItemsInventory[i].currentItem.health != currentItem.health)
                 {
-                    healthText = $"{itemsInventory[i].health} {GetChangeSign(itemsInventory[i].health, currentItem.health)} {currentItem.health})";
+                    healthText = $"{slotsItemsInventory[i].currentItem.health} {GetChangeSign(slotsItemsInventory[i].currentItem.health, currentItem.health)} {currentItem.health}";
                 }
-                if (itemsInventory[i].health == currentItem.health)
+                if (slotsItemsInventory[i].currentItem.health == currentItem.health)
                 {
-                    healthText = $"{itemsInventory[i].health})";
+                    healthText = $"{slotsItemsInventory[i].currentItem.health})";
                 }
 
 
                 //agility
-                if (itemsInventory[i].agility != currentItem.agility)
+                if (slotsItemsInventory[i].currentItem.agility != currentItem.agility)
                 {
-                    agilityText = $"{itemsInventory[i].agility} {GetChangeSign(itemsInventory[i].agility, currentItem.agility)} {currentItem.agility})";
+                    agilityText = $"{slotsItemsInventory[i].currentItem.agility} {GetChangeSign(slotsItemsInventory[i].currentItem.agility, currentItem.agility)} {currentItem.agility}";
                 }
-                if (itemsInventory[i].agility == currentItem.agility)
+                if (slotsItemsInventory[i].currentItem.agility == currentItem.agility)
                 {
-                    agilityText = $"{itemsInventory[i].agility})";
+                    agilityText = $"{slotsItemsInventory[i].currentItem.agility})";
                 }
 
                 //damage
-                if (itemsInventory[i].damage != currentItem.damage)
+                if (slotsItemsInventory[i].currentItem.damage != currentItem.damage)
                 {
-                    damageText = $"{itemsInventory[i].damage} {GetChangeSign(itemsInventory[i].damage, currentItem.damage)} {currentItem.damage})";
+                    damageText = $"{slotsItemsInventory[i].currentItem.damage} {GetChangeSign(slotsItemsInventory[i].currentItem.damage, currentItem.damage)} {currentItem.damage}";
                 }
-                if (itemsInventory[i].damage == currentItem.damage)
+                if (slotsItemsInventory[i].currentItem.damage == currentItem.damage)
                 {
-                    damageText = $"{itemsInventory[i].damage})";
+                    damageText = $"{slotsItemsInventory[i].currentItem.damage})";
                 }
 
                 //armor
-                if (itemsInventory[i].armor != currentItem.armor)
+                if (slotsItemsInventory[i].currentItem.armor != currentItem.armor)
                 {
-                    armorText = $"{itemsInventory[i].armor} {GetChangeSign(itemsInventory[i].armor, currentItem.armor)} {currentItem.armor})";
+                    armorText = $"{slotsItemsInventory[i].currentItem.armor} {GetChangeSign(slotsItemsInventory[i].currentItem.armor, currentItem.armor)} {currentItem.armor}";
                 }
-                if (itemsInventory[i].armor == currentItem.armor)
+                if (slotsItemsInventory[i].currentItem.armor == currentItem.armor)
                 {
-                    armorText = $"{itemsInventory[i].armor})";
+                    armorText = $"{slotsItemsInventory[i].currentItem.armor})";
                 }
 
             }
@@ -124,11 +138,11 @@ public class Inventory : MonoBehaviour, IEventSubscriber<GenerateNewItemEvent>, 
     }
     private void PutOnItem()
     {
-        for (int i = 0; i < itemsInventory.Length; i++)
+        for (int i = 0; i < slotsItemsInventory.Count; i++)
         {
-            if (itemsInventory[i].typeItem == currentItem.typeItem)
+            if (slotsItemsInventory[i].typeSlot == currentItem.typeItem)
             {
-                itemsInventory[i] = currentItem; 
+                slotsItemsInventory[i].currentItem = currentItem; 
                 break;
             }
         }
@@ -139,6 +153,50 @@ public class Inventory : MonoBehaviour, IEventSubscriber<GenerateNewItemEvent>, 
 
     }
 
+    //private void GenerateStartInventory()
+    //{
+
+    //    foreach (TypeItem type in System.Enum.GetValues(typeof(TypeItem)))
+    //    {
+    //        Item newItem = new Item();
+    //        newItem.typeItem = type;
+
+    //        switch (type)
+    //        {
+    //            case TypeItem.Weapon:
+    //                SetRandomStat(newItem);
+    //                break;
+    //            case TypeItem.Armor:
+    //                SetRandomStat(newItem);
+    //                break;
+    //            case TypeItem.Boots:
+    //                SetRandomStat(newItem);
+    //                break;
+    //            case TypeItem.Hemlet:
+    //                SetRandomStat(newItem);
+    //                break;
+    //            case TypeItem.Extra:
+    //                SetRandomStat(newItem);
+    //                break;
+    //            case TypeItem.Shield:
+    //                SetRandomStat(newItem);
+    //                break;
+    //        }
+    //        slotsItemsInventory.Add(new InventorySlotModel(newItem.typeItem, newItem));
+    //    }
+
+    //}
+
+    //private void SetRandomStat(Item item)
+    //{
+    //    item.health = UnityEngine.Random.Range(1, 3);
+    //    item.armor = UnityEngine.Random.Range(1, 3);
+    //    item.damage = UnityEngine.Random.Range(1, 10);
+    //    item.agility = UnityEngine.Random.Range(1, 2);
+    //    item.level = UnityEngine.Random.Range(1, 2);
+    //    item.price = UnityEngine.Random.Range(20, 100);
+    //    item.image = defaultIcon;
+    //}
 
     private void OnDestroy()
     {
