@@ -1,10 +1,10 @@
 
-public struct ChangeCoinEvent : IEvent
+public struct ChangeUICoinEvent : IEvent
 {
     public int CurrentValue;
     public bool IsPlusOperation;
 
-    public ChangeCoinEvent(int currentValue, bool isPlusOperation)
+    public ChangeUICoinEvent(int currentValue, bool isPlusOperation)
     {
         CurrentValue = currentValue;
         IsPlusOperation = isPlusOperation;

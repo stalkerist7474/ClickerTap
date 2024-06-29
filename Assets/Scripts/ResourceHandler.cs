@@ -38,7 +38,7 @@ public class ResourceHandler : MonoBehaviour,
     private void InitUIValue()
     {
         EventBus.RaiseEvent(new ChangeUIManaEvent(valueManaFlow, currentMaxValueMana, currentValueMana));
-        EventBus.RaiseEvent(new ChangeCoinEvent(currentValueCoins, true));
+        EventBus.RaiseEvent(new ChangeUICoinEvent(currentValueCoins, true));
     }
     //Mana
     private IEnumerator AddManaCoroutine()
@@ -61,6 +61,8 @@ public class ResourceHandler : MonoBehaviour,
         {
             currentValueMana -= valueSpend;
             EventBus.RaiseEvent(new ChangeUIManaEvent(valueManaFlow, currentMaxValueMana, currentValueMana));
+
+            EventBus.RaiseEvent(new SignalToGenerateNewItemEvent());
         }
     }
 
@@ -75,7 +77,7 @@ public class ResourceHandler : MonoBehaviour,
     private void AddCoin(int valueAdd)
     {
         currentValueCoins += valueAdd;
-        EventBus.RaiseEvent(new ChangeCoinEvent(currentValueCoins, true));
+        EventBus.RaiseEvent(new ChangeUICoinEvent(currentValueCoins, true));
     }
 
     private void SpendCoin(int valueSpend)
@@ -83,7 +85,7 @@ public class ResourceHandler : MonoBehaviour,
         if (valueSpend <= currentValueCoins)
         {
             currentValueCoins -= valueSpend;
-            EventBus.RaiseEvent(new ChangeCoinEvent(currentValueCoins, true));
+            EventBus.RaiseEvent(new ChangeUICoinEvent(currentValueCoins, true));       
         }
     }
 
@@ -95,11 +97,9 @@ public class ResourceHandler : MonoBehaviour,
         }
     }
 
-
-
-
     private void OnDestroy()
     {
         Unsubscribe();
     }
+
 }

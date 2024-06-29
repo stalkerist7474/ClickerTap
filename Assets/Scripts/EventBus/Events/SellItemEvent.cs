@@ -4,7 +4,7 @@ public struct SellItemEvent : IEvent
     public int Price;
 
 
-    public SellItemEvent(int price, bool isPlusOperation)
+    public SellItemEvent(int price)
     {
         Price = price;
 

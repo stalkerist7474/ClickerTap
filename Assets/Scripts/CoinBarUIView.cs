@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class CoinBarUIView : MonoBehaviour, IEventSubscriber<ChangeCoinEvent>
+public class CoinBarUIView : MonoBehaviour, IEventSubscriber<ChangeUICoinEvent>
 {
     [SerializeField] private TextMeshProUGUI currentCoinText;
 
@@ -18,13 +18,13 @@ public class CoinBarUIView : MonoBehaviour, IEventSubscriber<ChangeCoinEvent>
 
     private void Subscribe()
     {
-        EventBus.RegisterTo(this as IEventSubscriber<ChangeCoinEvent>);
+        EventBus.RegisterTo(this as IEventSubscriber<ChangeUICoinEvent>);
     }
     private void Unsubscribe()
     {
-        EventBus.UnregisterFrom(this as IEventSubscriber<ChangeCoinEvent>);
+        EventBus.UnregisterFrom(this as IEventSubscriber<ChangeUICoinEvent>);
     }
-    public void OnEvent(ChangeCoinEvent eventName)
+    public void OnEvent(ChangeUICoinEvent eventName)
     {
         UpdateCoinbar(eventName.CurrentValue);
     }
