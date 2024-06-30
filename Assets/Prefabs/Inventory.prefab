@@ -416,6 +416,7 @@ GameObject:
   - component: {fileID: 4604169732074158920}
   - component: {fileID: 1069790509439751158}
   - component: {fileID: 8508054993315193729}
+  - component: {fileID: 461925385425836083}
   m_Layer: 5
   m_Name: PlayerStats
   m_TagString: Untagged
@@ -485,6 +486,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &461925385425836083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2028014754888071747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e5a1713554f7a44b893ef9451d698e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthStatText: {fileID: 3192382637449692180}
+  agilityStatText: {fileID: 8682845148577464523}
+  damageStatText: {fileID: 153064798223022562}
+  armorStatText: {fileID: 631492033985658113}
 --- !u!1 &2152508708506221866
 GameObject:
   m_ObjectHideFlags: 0
@@ -781,6 +798,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lootPopUpPanel: {fileID: 0}
+  slotsItemsInventory: []
+  defaultIcon: {fileID: 0}
 --- !u!114 &132359888881129149
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -793,6 +812,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d046efa54dc98d84985d53995e92fd72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slotsItemsViewInventory: []
 --- !u!1 &5006168195794468008
 GameObject:
   m_ObjectHideFlags: 0

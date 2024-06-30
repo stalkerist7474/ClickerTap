@@ -6,12 +6,14 @@ public class ResourceHandler : MonoBehaviour,
     IEventSubscriber<SpendManaEvent>,
     IEventSubscriber<SellItemEvent>
 {
+    [Header("Mana settings")]
     [SerializeField] private int currentValueMana = 20;
     [SerializeField] private int currentMaxValueMana = 100;
-    [SerializeField] private int currentValueCoins = 200;
-
-    [SerializeField] private float delayGetMana= 1f;
     [SerializeField] private int valueManaFlow = 1;
+    [SerializeField] private float delayGetMana= 1f;
+    [Space]
+    [Header("Coins settings")]
+    [SerializeField] private int currentValueCoins = 200;
 
     private void Awake()
     {
@@ -49,6 +51,9 @@ public class ResourceHandler : MonoBehaviour,
             if (currentValueMana <= currentMaxValueMana)
             {
                 currentValueMana += valueManaFlow;
+                if (currentValueMana > currentMaxValueMana)
+                    currentValueMana = currentMaxValueMana;
+
                 EventBus.RaiseEvent(new ChangeUIManaEvent(valueManaFlow , currentMaxValueMana, currentValueMana));
             }
 
