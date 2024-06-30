@@ -78,7 +78,7 @@ public class Inventory : MonoBehaviour, IEventSubscriber<GenerateNewItemEvent>, 
                 //Health
                 if (SlotsItemsInventory[i].currentItem.health != currentItem.health)
                 {
-                    healthText = $"{SlotsItemsInventory[i].currentItem.health} {GetChangeSign(SlotsItemsInventory[i].currentItem.health, currentItem.health)} {currentItem.health}";
+                    healthText = $"{SlotsItemsInventory[i].currentItem.health} {GetChangeSign(SlotsItemsInventory[i].currentItem.health, currentItem.health)} {Math.Abs(SlotsItemsInventory[i].currentItem.health - currentItem.health)}";
                 }
                 if (SlotsItemsInventory[i].currentItem.health == currentItem.health)
                 {
@@ -89,7 +89,7 @@ public class Inventory : MonoBehaviour, IEventSubscriber<GenerateNewItemEvent>, 
                 //agility
                 if (SlotsItemsInventory[i].currentItem.agility != currentItem.agility)
                 {
-                    agilityText = $"{SlotsItemsInventory[i].currentItem.agility} {GetChangeSign(SlotsItemsInventory[i].currentItem.agility, currentItem.agility)} {currentItem.agility}";
+                    agilityText = $"{SlotsItemsInventory[i].currentItem.agility} {GetChangeSign(SlotsItemsInventory[i].currentItem.agility, currentItem.agility)} {Math.Abs(SlotsItemsInventory[i].currentItem.agility - currentItem.agility)}";
                 }
                 if (SlotsItemsInventory[i].currentItem.agility == currentItem.agility)
                 {
@@ -99,7 +99,7 @@ public class Inventory : MonoBehaviour, IEventSubscriber<GenerateNewItemEvent>, 
                 //damage
                 if (SlotsItemsInventory[i].currentItem.damage != currentItem.damage)
                 {
-                    damageText = $"{SlotsItemsInventory[i].currentItem.damage} {GetChangeSign(SlotsItemsInventory[i].currentItem.damage, currentItem.damage)} {currentItem.damage}";
+                    damageText = $"{SlotsItemsInventory[i].currentItem.damage} {GetChangeSign(SlotsItemsInventory[i].currentItem.damage, currentItem.damage)} {Math.Abs(SlotsItemsInventory[i].currentItem.damage - currentItem.damage)}";
                 }
                 if (SlotsItemsInventory[i].currentItem.damage == currentItem.damage)
                 {
@@ -109,7 +109,7 @@ public class Inventory : MonoBehaviour, IEventSubscriber<GenerateNewItemEvent>, 
                 //armor
                 if (SlotsItemsInventory[i].currentItem.armor != currentItem.armor)
                 {
-                    armorText = $"{SlotsItemsInventory[i].currentItem.armor} {GetChangeSign(SlotsItemsInventory[i].currentItem.armor, currentItem.armor)} {currentItem.armor}";
+                    armorText = $"{SlotsItemsInventory[i].currentItem.armor} {GetChangeSign(SlotsItemsInventory[i].currentItem.armor, currentItem.armor)} {Math.Abs(SlotsItemsInventory[i].currentItem.armor - currentItem.armor)}";
                 }
                 if (SlotsItemsInventory[i].currentItem.armor == currentItem.armor)
                 {
